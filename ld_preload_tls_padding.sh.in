@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Workaround a race that can cause getprop to return empty value.
+while [ "$DEVNAME" = "" ] && sleep 0.1; do
+    DEVNAME=$(getprop ro.build.product)
+done
+
+case "$DEVNAME" in
+    @DEV_NAMES_TO_PRELOAD_GLOB@)
+        # See https://unix.stackexchange.com/a/162893
+        export LD_PRELOAD=${LD_PRELOAD:+${LD_PRELOAD}:}tls-padding.so
+        ;;
+esac

@@ -14,4 +14,4 @@ ld_preload_tls_padding.sh: ld_preload_tls_padding.sh.in
 
 .PHONY: clean
 clean:
-	rm -rf tls-padding.so
+	rm -rf tls-padding.so ld_preload_tls_padding.sh

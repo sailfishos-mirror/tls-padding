@@ -1,0 +1,22 @@
+Source: tls-padding
+Priority: optional
+Maintainer: Ratchanan Srirattanamet <ratchanan@ubports.com>
+Build-Depends: debhelper (>= 9~), dh-exec
+Standards-Version: 4.4.1
+Section: libs
+
+Package: libtls-padding0
+Architecture: any
+Multi-Arch: same
+Depends: ${shlibs:Depends}, ${misc:Depends}, libhybris-utils
+Description: A do-nothing library that pads the TLS area.
+ On some libhybris devices, Bionic is not properly patched to allow
+ __set_errno() to be hooked. This causes Bionic to overwrite some TLS memory
+ in case some syscall fails. If it overwrite some important variable/pointer,
+ the program can crash.
+ .
+ This library workarounds the problem by allocating some TLS memory itself. For
+ this to works, It must be loaded via LD_PRELOAD so that the padding is at the
+ beginning. Also, if the main binary has its own TLS, this library can't do
+ anything. One has to hope that the main binary's TLS does not clash into
+ Bionic's errno TLS slot.

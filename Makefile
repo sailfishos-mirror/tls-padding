@@ -1,10 +1,10 @@
 # Default device names to preload is "", which matches nothing.
 DEV_NAMES_TO_PRELOAD_GLOB ?= \"\"
 
-all: tls-padding.so ld_preload_tls_padding.sh
+all: libtls-padding.so ld_preload_tls_padding.sh
 .PHONY: all
 
-tls-padding.so: tls-padding.cpp
+libtls-padding.so: tls-padding.cpp
 	$(CXX) -shared -o $@ $^
 
 ld_preload_tls_padding.sh: ld_preload_tls_padding.sh.in
@@ -14,4 +14,4 @@ ld_preload_tls_padding.sh: ld_preload_tls_padding.sh.in
 
 .PHONY: clean
 clean:
-	rm -rf tls-padding.so ld_preload_tls_padding.sh
+	rm -rf libtls-padding.so ld_preload_tls_padding.sh

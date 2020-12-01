@@ -9,7 +9,7 @@ libtls-padding.so: tls-padding.cpp
 
 ld_preload_tls_padding.sh: ld_preload_tls_padding.sh.in
 	sed \
-		-e s/@DEV_NAMES_TO_PRELOAD_GLOB@/$(DEV_NAMES_TO_PRELOAD_GLOB)/ \
+		-e s/@DEV_NAMES_TO_PRELOAD_GLOB@/"$(DEV_NAMES_TO_PRELOAD_GLOB)"/ \
 		$< >$@
 
 .PHONY: clean

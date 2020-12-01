@@ -15,7 +15,7 @@
 
 
 %:
-	dh $@
+	dh $@ --parallel
 
 override_dh_auto_build:
 	DEV_NAMES_TO_PRELOAD_GLOB="krillin|vegetahd|arale" dh_auto_build

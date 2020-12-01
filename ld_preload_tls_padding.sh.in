@@ -15,6 +15,6 @@ done
 case "$DEVNAME" in
     @DEV_NAMES_TO_PRELOAD_GLOB@)
         # See https://unix.stackexchange.com/a/162893
-        export LD_PRELOAD=${LD_PRELOAD:+${LD_PRELOAD}:}libtls-padding.so
+        export LD_PRELOAD=libtls-padding.so${LD_PRELOAD:+:${LD_PRELOAD}}
         ;;
 esac

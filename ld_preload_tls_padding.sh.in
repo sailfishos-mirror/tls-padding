@@ -1,5 +1,12 @@
 #!/bin/sh
 
+# Avoid adding value twice if nested.
+case "$LD_PRELOAD" in
+    *libtls-padding.so*)
+        return
+    ;;
+esac
+
 # Workaround a race that can cause getprop to return empty value.
 while [ "$DEVNAME" = "" ] && sleep 0.1; do
     DEVNAME=$(getprop ro.build.product)

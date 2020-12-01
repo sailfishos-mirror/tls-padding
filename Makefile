@@ -5,7 +5,7 @@ all: libtls-padding.so ld_preload_tls_padding.sh
 .PHONY: all
 
 libtls-padding.so: tls-padding.cpp
-	$(CXX) -shared -o $@ $^
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -std=c++11 -shared -o $@ $^
 
 ld_preload_tls_padding.sh: ld_preload_tls_padding.sh.in
 	sed \

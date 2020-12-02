@@ -13,9 +13,21 @@
 # package maintainers to append LDFLAGS
 #export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
 
+include /usr/share/dpkg/architecture.mk
 
 %:
 	dh $@ --parallel
 
 override_dh_auto_build:
 	DEV_NAMES_TO_PRELOAD_GLOB="krillin|vegetahd|arale" dh_auto_build
+
+override_dh_install:
+	dh_install
+	# Setuid the library to allow setuid programs (e.g. sudo) to preload this.
+	# I don't think any of setuid binaries actually need this, but glibc
+	# complains loudly (and vaguely) if it's not set, which breaks crossbuilder.
+	chmod 4644 debian/libtls-padding0/usr/lib/${DEB_HOST_MULTIARCH}/libtls-padding.so
+
+override_dh_fixperms:
+	# Prevent dh_fixperms from messing with our setuid.
+	dh_fixperms -Xdebian/libtls-padding0/usr/lib/${DEB_HOST_MULTIARCH}/libtls-padding.so

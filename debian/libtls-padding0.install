@@ -1,4 +1,3 @@
 #!/usr/bin/dh-exec
 
 libtls-padding.so /usr/lib/${DEB_HOST_MULTIARCH}/
-ld_preload_tls_padding.sh /etc/profile.d/

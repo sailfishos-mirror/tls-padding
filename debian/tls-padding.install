@@ -1,0 +1,1 @@
+ld_preload_tls_padding.sh /etc/profile.d/

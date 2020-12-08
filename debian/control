@@ -8,7 +8,7 @@ Section: libs
 Package: libtls-padding0
 Architecture: any
 Multi-Arch: same
-Depends: ${shlibs:Depends}, ${misc:Depends}, libhybris-utils
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: A do-nothing library that pads the TLS area.
  On some libhybris devices, Bionic is not properly patched to allow
  __set_errno() to be hooked. This causes Bionic to overwrite some TLS memory
@@ -20,3 +20,26 @@ Description: A do-nothing library that pads the TLS area.
  beginning. Also, if the main binary has its own TLS, this library can't do
  anything. One has to hope that the main binary's TLS does not clash into
  Bionic's errno TLS slot.
+ .
+ This package contains only the library itself.
+
+Package: tls-padding
+Architecture: all
+Multi-Arch: foreign
+Depends: ${shlibs:Depends}, ${misc:Depends},
+    libtls-padding0 (>= ${source:Version}), libtls-padding0 (<< ${source:Version}.1~),
+    libhybris-utils
+Description: A do-nothing library that pads the TLS area.
+ On some libhybris devices, Bionic is not properly patched to allow
+ __set_errno() to be hooked. This causes Bionic to overwrite some TLS memory
+ in case some syscall fails. If it overwrite some important variable/pointer,
+ the program can crash.
+ .
+ This library workarounds the problem by allocating some TLS memory itself. For
+ this to works, It must be loaded via LD_PRELOAD so that the padding is at the
+ beginning. Also, if the main binary has its own TLS, this library can't do
+ anything. One has to hope that the main binary's TLS does not clash into
+ Bionic's errno TLS slot.
+ .
+ This package contains an /etc/profile.d script to preload the library
+ automatically.

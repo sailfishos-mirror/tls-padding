@@ -8,8 +8,9 @@ case "$LD_PRELOAD" in
 esac
 
 # Workaround a race that can cause getprop to return empty value.
+DEVNAME=$(getprop ro.product.device)
 while [ "$DEVNAME" = "" ] && sleep 0.1; do
-    DEVNAME=$(getprop ro.build.product)
+    DEVNAME=$(getprop ro.product.device)
 done
 
 case "$DEVNAME" in

@@ -18,9 +18,6 @@ include /usr/share/dpkg/architecture.mk
 %:
 	dh $@ --parallel
 
-override_dh_auto_build:
-	DEV_NAMES_TO_PRELOAD_GLOB="krillin|vegetahd|arale" dh_auto_build
-
 override_dh_install:
 	dh_install
 	# Setuid the library to allow setuid programs (e.g. sudo) to preload this.

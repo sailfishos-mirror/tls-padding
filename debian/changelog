@@ -1,3 +1,16 @@
+tls-padding (0.3) focal; urgency=medium
+
+  [ Ratchanan Srirattanamet ]
+  * Use the not-obsolete property for device id
+
+  [ Rodney Dawes ]
+  * Always preload tls-padding library when installed.
+
+  [ Ratchanan Srirattanamet ]
+  * Move Jenkinsfile to debian/ per the new guideline
+
+ -- Ratchanan Srirattanamet <ratchanan@ubports.com>  Tue, 29 Mar 2022 00:38:12 +0700
+
 tls-padding (0.2) xenial; urgency=medium
 
   * Remove probably not required .dirs file
